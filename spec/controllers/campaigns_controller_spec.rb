@@ -96,4 +96,29 @@ RSpec.describe CampaignsController, type: :controller do
     end
   end
 
+  describe "#destroy" do
+    it "removes the record from the database" do
+      # c = FactoryGirl.create(:campaign)
+      # expect { delete :destroy, params: { id: c.id } }.to change { Campaign.count }.by(-1)
+
+
+      # GIVEN: we have a campaign record in the database
+      c = FactoryGirl.create(:campaign)
+      count_before = Campaign.count
+
+      # WHEN: we sent a delete request to the destroy action
+      delete :destroy, params: { id: c.id }
+
+      # THEN: the campaign record gets removed
+      count_after = Campaign.count
+      expect(count_after).to eq(count_before - 1)
+    end
+
+    it "redirects to the campaign listings page" do
+      c = FactoryGirl.create :campaign
+      delete :destroy, params: { id: c.id }
+      expect(response).to redirect_to campaigns_path
+    end
+  end
+
 end
