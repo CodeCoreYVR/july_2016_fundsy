@@ -3,7 +3,7 @@ class Campaign < ApplicationRecord
 
   # this gives us the possibility of creating rewards at the same time we create
   # the campaign. By passing a special key callad: rewards_attributes
-  accepts_nested_attributes_for :rewards, reject_if: :all_blank
+  accepts_nested_attributes_for :rewards, reject_if: :all_blank, allow_destroy: true
 
   validates :title, presence: true, uniqueness: true
 

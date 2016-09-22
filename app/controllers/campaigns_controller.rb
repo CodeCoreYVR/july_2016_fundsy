@@ -12,7 +12,7 @@ class CampaignsController < ApplicationController
                                                               :description,
                                                               :goal,
                                                               :end_date,
-                                                              {rewards_attributes: [:title, :body, :amount]})
+                                                              {rewards_attributes: [:title, :body, :amount, :_destroy, :id]})
     if @campaign.save
       redirect_to campaign_path(@campaign), notice: "Campaign created!"
     else

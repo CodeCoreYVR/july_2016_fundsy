@@ -5,11 +5,11 @@
   <%= f.input :goal %>
   <%= f.input :end_date %>
   <h2>Rewards</h2>
-  <%= f.simple_fields_for :rewards do |r| %>
-    <%= r.input :title %>
-    <%= r.input :body %>
-    <%= r.input :amount %>
-    <hr>
-  <% end %>
+  <div id="rewards">
+    <%= f.simple_fields_for :rewards do |r| %>
+      <%= render "reward_fields", f: r %>
+    <% end %>
+    <%= link_to_add_association 'add reward', f, :rewards %>
+  </div>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
