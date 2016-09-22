@@ -9,6 +9,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= link_to "Home", root_path %>
+    |
+    <%= link_to "New Campaign", new_campaign_path %>
+    <hr>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

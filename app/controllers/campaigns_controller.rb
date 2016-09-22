@@ -2,13 +2,17 @@ class CampaignsController < ApplicationController
 
   def new
     @campaign = Campaign.new
+    # We need to build campaigns in here in order for it to show correctly on the
+    # form so we can save rewards at the same time we create a campaign
+    3.times { @campaign.rewards.build }
   end
 
   def create
     @campaign = Campaign.new params.require(:campaign).permit(:title,
                                                               :description,
                                                               :goal,
-                                                              :end_date)
+                                                              :end_date,
+                                                              {rewards_attributes: [:title, :body, :amount]})
     if @campaign.save
       redirect_to campaign_path(@campaign), notice: "Campaign created!"
     else
