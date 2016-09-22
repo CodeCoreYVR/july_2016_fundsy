@@ -2,6 +2,18 @@
 <p>
   <%= @campaign.description %>
 </p>
+<% if @campaign.draft? %>
+  <div class="label label-info">
+    draft
+  </div>
+  <%= link_to "Publish", campaign_publishings_path(@campaign),
+                         class: "btn btn-primary btn-sm",
+                         method: :post,
+                         data: { confirm: "Are you sure you want to publish" }
+                         %>
+<% end %>
+
+<div class="clearfix"></div>
 
 <% @campaign.rewards.each do |reward| %>
   <div class="well col-md-4">
