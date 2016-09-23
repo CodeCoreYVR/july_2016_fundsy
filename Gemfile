@@ -32,6 +32,10 @@ gem "simple_form"
 gem "cocoon"
 gem "aasm"
 
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -56,8 +60,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   gem "interactive_editor"
+
   gem "awesome_print"
+
   gem "hirb"
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

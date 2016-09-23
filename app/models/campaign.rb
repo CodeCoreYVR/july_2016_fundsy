@@ -7,6 +7,18 @@ class Campaign < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
 
+  geocoded_by :address      # address is the database field
+  after_validation :geocode # the geocode methods comes from the Geocoder gem.
+                            # if you're doing geocoding a lot, it may be a good
+                            # idea to move it to the background because it
+                            # actually connects to an external service
+
+  # if you have multiple fields for the address you can do something like:
+  # geocoded_by :full_street_address
+  # def full_street_address
+  #   "#{street} #{city} #{province} #{country} #{postal_code}"
+  # end
+
   include AASM
 
   aasm whiny_transitions: false do

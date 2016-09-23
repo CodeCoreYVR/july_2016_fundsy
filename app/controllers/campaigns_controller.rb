@@ -11,6 +11,7 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new params.require(:campaign).permit(:title,
                                                               :description,
                                                               :goal,
+                                                              :address,
                                                               :end_date,
                                                               {rewards_attributes: [:title, :body, :amount, :_destroy, :id]})
     if @campaign.save
@@ -25,7 +26,17 @@ class CampaignsController < ApplicationController
   end
 
   def index
-    @campaigns = Campaign.order(:created_at)
+    if params[:lat]
+      @campaigns = Campaign.near([params[:lat], params[:lng]], 50, units: :km)
+    else
+      @campaigns = Campaign.where.not(latitude: nil, longitude: nil).order(:created_at).limit(30)
+    end
+
+    @markers = Gmaps4rails.build_markers(@campaigns) do |campaign, marker|
+      marker.lat        campaign.latitude
+      marker.lng        campaign.longitude
+      marker.infowindow campaign.title
+    end
   end
 
   def destroy

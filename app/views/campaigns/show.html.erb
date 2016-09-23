@@ -2,6 +2,11 @@
 <p>
   <%= @campaign.description %>
 </p>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+
 <% if @campaign.draft? %>
   <div class="label label-info">
     draft
@@ -24,3 +29,20 @@
     <%= number_to_currency(reward.amount) %>
   </div>
 <% end %>
+
+
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+      {
+        "lat": <%= @campaign.latitude %>,
+        "lng": <%= @campaign.longitude %>,
+        "infowindow": "<div style='background-color: red'><%= @campaign.title %></div>"
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(17);
+  });
+</script>
