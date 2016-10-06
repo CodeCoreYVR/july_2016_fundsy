@@ -29,7 +29,13 @@
     <%= number_to_currency(reward.amount) %>
   </div>
 <% end %>
+<div class="clearfix"></div>
+<h3>Pledge</h3>
 
+<%= simple_form_for [@campaign, @pledge] do |f| %>
+  <%= f.input :amount %>
+  <%= f.submit "Commit", class: "btn btn-primary" %>
+<% end %>
 
 <script>
   handler = Gmaps.build('Google');
