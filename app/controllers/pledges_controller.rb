@@ -7,7 +7,7 @@ class PledgesController < ApplicationController
     @pledge.campaign = @campaign
     @pledge.user = current_user
     if @pledge.save
-      redirect_to campaign_path(params[:campaign_id])
+      redirect_to new_pledge_payment_path(@pledge)
     else
       render "campaigns/show"
     end

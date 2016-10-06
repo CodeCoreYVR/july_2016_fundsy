@@ -31,6 +31,7 @@ gem "bootstrap-sass"
 gem "simple_form"
 gem "cocoon"
 gem "aasm"
+gem "stripe"
 
 gem 'geocoder'
 gem 'gmaps4rails'
@@ -64,6 +65,7 @@ group :development do
   gem "awesome_print"
 
   gem "hirb"
+  gem "rails-erd"
 
 end
 
