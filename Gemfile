@@ -32,6 +32,7 @@ gem "simple_form"
 gem "cocoon"
 gem "aasm"
 gem "stripe"
+gem 'virtus'
 
 gem 'geocoder'
 gem 'gmaps4rails'
